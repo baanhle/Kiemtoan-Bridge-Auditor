@@ -22,7 +22,7 @@ import {
   BarChart3
 } from 'lucide-react';
 
-const API_BASE_URL = 'http://localhost:8000';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
 function App() {
   const [activeStandard, setActiveStandard] = useState('TCVN 11823:2017');
