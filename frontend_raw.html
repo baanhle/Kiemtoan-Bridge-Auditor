@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Kiểm Toán Mặt Cắt Cầu Pro - Bridge Engineering Software</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "tertiary-container": "#885122",
+                        "on-surface": "#191c1d",
+                        "surface-variant": "#e1e3e4",
+                        "on-surface-variant": "#3f484a",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#001f24",
+                        "primary-fixed": "#a2effe",
+                        "surface-container": "#eceeef",
+                        "surface-tint": "#016875",
+                        "outline-variant": "#bec8cb",
+                        "surface-container-low": "#f2f4f5",
+                        "on-secondary-fixed": "#051f23",
+                        "on-tertiary-fixed": "#2f1400",
+                        "tertiary-fixed": "#ffdcc4",
+                        "surface-dim": "#d8dadb",
+                        "inverse-surface": "#2e3132",
+                        "on-secondary-container": "#50686d",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-highest": "#e1e3e4",
+                        "primary": "#004e58",
+                        "on-secondary-fixed-variant": "#334b4f",
+                        "on-tertiary-fixed-variant": "#6c3a0c",
+                        "on-background": "#191c1d",
+                        "surface-bright": "#f8fafb",
+                        "secondary-fixed-dim": "#b1cbd1",
+                        "secondary-fixed": "#cde7ed",
+                        "tertiary-fixed-dim": "#ffb780",
+                        "on-tertiary-container": "#ffcfad",
+                        "secondary": "#4a6267",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-primary-fixed-variant": "#004e59",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#cde7ed",
+                        "tertiary": "#6c3a0c",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#97e4f3",
+                        "primary-container": "#006875",
+                        "error": "#ba1a1a",
+                        "surface": "#f8fafb",
+                        "primary-fixed-dim": "#85d2e1",
+                        "inverse-primary": "#85d2e1",
+                        "outline": "#6f797b",
+                        "inverse-on-surface": "#eff1f2",
+                        "on-error-container": "#93000a",
+                        "background": "#f8fafb",
+                        "surface-container-high": "#e6e8e9"
+                    },
+                    fontFamily: {
+                        "headline": ["Space Grotesk"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-headline { font-family: 'Space Grotesk', sans-serif; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed overflow-hidden h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="bg-[#f8fafb] dark:bg-slate-900 flex justify-between items-center px-8 h-16 w-full docked full-width top-0 z-50 shadow-sm dark:shadow-none">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold text-[#006875] dark:text-[#00bcd4] tracking-tighter font-headline">Kiểm Toán Mặt Cắt Cầu Pro</span>
+<nav class="hidden md:flex gap-6 font-headline font-bold text-sm tracking-tight">
+<a class="text-[#006875] dark:text-[#00bcd4] border-b-2 border-[#006875] pb-1 transition-colors" href="#">TCVN 11823:2017</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-[#006875] transition-colors" href="#">AASHTO LRFD</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-[#006875] transition-colors" href="#">Eurocode</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="text-right hidden lg:block">
+<p class="text-[10px] uppercase tracking-widest text-outline font-medium">Chuyên gia phụ trách</p>
+<p class="text-[#006875] dark:text-[#00bcd4] text-sm font-semibold">PGS.TS. Lê Bá Anh - Trường Đại học GTVT</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="p-2 rounded-full hover:bg-[#e6e8e9] dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">dark_mode</span>
+</button>
+<button class="p-2 rounded-full hover:bg-[#e6e8e9] dark:hover:bg-slate-800 transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant">settings</span>
+</button>
+</div>
+</div>
+</header>
+<main class="flex-1 flex overflow-hidden">
+<!-- Sidebar Navigation (Implicit from Shared Components) -->
+<aside class="h-full w-20 bg-surface-container-low flex flex-col items-center py-6 gap-6">
+<div class="bg-white dark:bg-slate-700 text-[#006875] dark:text-[#00bcd4] p-3 rounded-xl shadow-sm">
+<span class="material-symbols-outlined" data-weight="fill" style="font-variation-settings: 'FILL' 1;">calculate</span>
+</div>
+<button class="p-3 text-slate-400 hover:bg-surface-container-high rounded-xl transition-all">
+<span class="material-symbols-outlined">history</span>
+</button>
+<button class="p-3 text-slate-400 hover:bg-surface-container-high rounded-xl transition-all">
+<span class="material-symbols-outlined">menu_book</span>
+</button>
+<button class="p-3 text-slate-400 hover:bg-surface-container-high rounded-xl transition-all">
+<span class="material-symbols-outlined">smart_toy</span>
+</button>
+<div class="mt-auto flex flex-col gap-4">
+<button class="p-3 text-slate-400 hover:bg-surface-container-high rounded-xl transition-all">
+<span class="material-symbols-outlined">logout</span>
+</button>
+</div>
+</aside>
+<!-- Main Content Layout (55% / 45%) -->
+<div class="flex-1 flex">
+<!-- LEFT COLUMN (55%): INPUTS -->
+<section class="w-[55%] flex flex-col h-full bg-surface-container-low">
+<div class="flex-1 overflow-y-auto p-8 space-y-8">
+<!-- Group 1: Thông số Hình học -->
+<div class="glass-card rounded-xl p-6 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary-container">architecture</span>
+<h2 class="text-lg font-bold font-headline uppercase tracking-tight">Thông số Hình học</h2>
+</div>
+<div class="grid grid-cols-2 gap-6">
+<div class="space-y-1.5">
+<label class="text-xs font-bold text-outline uppercase tracking-wider">Diện tích A (mm²)</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-transparent focus:border-primary-container focus:bg-surface-container-lowest focus:ring-0 rounded-t-lg p-3 text-sm font-medium transition-all" type="number" value="1250000"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-xs font-bold text-outline uppercase tracking-wider">Mô men quán tính I (mm⁴)</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-transparent focus:border-primary-container focus:bg-surface-container-lowest focus:ring-0 rounded-t-lg p-3 text-sm font-medium transition-all" type="number" value="450000000"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-xs font-bold text-outline uppercase tracking-wider">Chiều cao h (mm)</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-transparent focus:border-primary-container focus:bg-surface-container-lowest focus:ring-0 rounded-t-lg p-3 text-sm font-medium transition-all" type="number" value="2000"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-xs font-bold text-outline uppercase tracking-wider">Bề rộng cánh (mm)</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-transparent focus:border-primary-container focus:bg-surface-container-lowest focus:ring-0 rounded-t-lg p-3 text-sm font-medium transition-all" type="number" value="1500"/>
+</div>
+<div class="col-span-2 space-y-1.5">
+<label class="text-xs font-bold text-outline uppercase tracking-wider">Chiều dày bản nắp (mm)</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-transparent focus:border-primary-container focus:bg-surface-container-lowest focus:ring-0 rounded-t-lg p-3 text-sm font-medium transition-all" type="number" value="250"/>
+</div>
+</div>
+</div>
+<!-- Group 2: Cốt thép -->
+<div class="glass-card rounded-xl p-6 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary-container">rebase_edit</span>
+<h2 class="text-lg font-bold font-headline uppercase tracking-tight">Cốt thép &amp; Dự ứng lực</h2>
+</div>
+<div class="space-y-8">
+<div>
+<h3 class="text-sm font-bold text-on-surface-variant mb-4 flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-primary rounded-full"></span> Thanh thép thường
+                                </h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold text-outline uppercase">Số lượng thanh</label>
+<input class="w-full bg-surface-container-low border-0 p-3 text-sm rounded-lg" type="number" value="24"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold text-outline uppercase">Đường kính (mm)</label>
+<input class="w-full bg-surface-container-low border-0 p-3 text-sm rounded-lg" type="number" value="32"/>
+</div>
+</div>
+</div>
+<div class="pt-4 border-t border-outline-variant/20">
+<h3 class="text-sm font-bold text-on-surface-variant mb-4 flex items-center gap-2">
+<span class="w-1.5 h-1.5 bg-primary rounded-full"></span> Cáp dự ứng lực
+                                </h3>
+<div class="grid grid-cols-3 gap-4">
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold text-outline uppercase">Số bó</label>
+<input class="w-full bg-surface-container-low border-0 p-3 text-sm rounded-lg" type="number" value="12"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold text-outline uppercase">Số tao/bó</label>
+<input class="w-full bg-surface-container-low border-0 p-3 text-sm rounded-lg" type="number" value="19"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-[10px] font-bold text-outline uppercase">Độ lệch tâm (mm)</label>
+<input class="w-full bg-surface-container-low border-0 p-3 text-sm rounded-lg" type="number" value="850"/>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Group 3: Nội lực -->
+<div class="glass-card rounded-xl p-6 shadow-sm">
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-primary-container">speed</span>
+<h2 class="text-lg font-bold font-headline uppercase tracking-tight">Nội lực thiết kế</h2>
+</div>
+<div class="grid grid-cols-3 gap-6">
+<div class="space-y-1.5">
+<label class="text-xs font-bold text-outline uppercase tracking-wider">Moment Mu (kNm)</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-transparent focus:border-primary-container focus:bg-surface-container-lowest focus:ring-0 rounded-t-lg p-3 text-sm font-medium transition-all" type="number" value="4500"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-xs font-bold text-outline uppercase tracking-wider">Lực cắt Vu (kN)</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-transparent focus:border-primary-container focus:bg-surface-container-lowest focus:ring-0 rounded-t-lg p-3 text-sm font-medium transition-all" type="number" value="1200"/>
+</div>
+<div class="space-y-1.5">
+<label class="text-xs font-bold text-outline uppercase tracking-wider">Lực dọc Nu (kN)</label>
+<input class="w-full bg-surface-container-low border-0 border-b-2 border-transparent focus:border-primary-container focus:bg-surface-container-lowest focus:ring-0 rounded-t-lg p-3 text-sm font-medium transition-all" type="number" value="300"/>
+</div>
+</div>
+</div>
+</div>
+<!-- Left Column Footer -->
+<div class="p-6 bg-surface-container-highest flex gap-4 items-center">
+<button class="flex-1 bg-gradient-to-r from-primary-container to-primary text-white font-bold py-4 rounded-xl shadow-lg shadow-primary/20 hover:scale-[0.98] transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">analytics</span>
+                        CHẠY KIỂM TOÁN
+                    </button>
+<button class="px-6 py-4 bg-white text-error font-bold rounded-xl hover:bg-error-container/20 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">delete_sweep</span>
+                        XÓA DỮ LIỆU
+                    </button>
+</div>
+</section>
+<!-- RIGHT COLUMN (45%): RESULTS & AI -->
+<section class="w-[45%] h-full bg-surface flex flex-col border-l border-outline-variant/30">
+<!-- Tabs Header -->
+<div class="flex p-2 bg-surface-container-low m-6 rounded-full">
+<button class="flex-1 py-2.5 rounded-full bg-white text-[#006875] shadow-sm font-bold text-sm flex items-center justify-center gap-2 transition-all">
+<span class="material-symbols-outlined text-sm">assignment_turned_in</span>
+                        Kết quả kiểm toán
+                    </button>
+<button class="flex-1 py-2.5 rounded-full text-slate-500 font-medium text-sm flex items-center justify-center gap-2 transition-all hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-sm">smart_toy</span>
+                        Trợ lý AI
+                    </button>
+</div>
+<!-- Tab Content Area -->
+<div class="flex-1 overflow-y-auto px-8 pb-8 space-y-8">
+<!-- Status Banner -->
+<div class="relative overflow-hidden rounded-2xl bg-gradient-to-br from-[#006875] to-[#004e58] p-8 text-white shadow-xl">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-2 text-primary-fixed opacity-90">
+<span class="material-symbols-outlined text-sm">verified</span>
+<span class="text-[10px] font-bold uppercase tracking-[0.2em]">Trạng thái kiểm toán</span>
+</div>
+<h2 class="text-4xl font-extrabold font-headline mb-4 tracking-tighter">ĐẠT YÊU CẦU</h2>
+<p class="text-sm text-primary-fixed/80 max-w-xs leading-relaxed">Mặt cắt được kiểm tra theo tiêu chuẩn TCVN 11823:2017 với hệ số an toàn tối ưu.</p>
+</div>
+<span class="material-symbols-outlined absolute -bottom-6 -right-6 text-[180px] opacity-10 rotate-12">check_circle</span>
+</div>
+<!-- Analysis Stats -->
+<div class="space-y-4">
+<h3 class="text-xs font-bold text-outline uppercase tracking-widest flex items-center gap-2">
+<span class="w-8 h-[1px] bg-outline-variant"></span> Tỉ lệ sức kháng (%)
+                        </h3>
+<div class="space-y-6">
+<!-- Moment -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="text-sm font-medium text-on-surface-variant">Sức kháng uốn (Moment)</span>
+<span class="text-lg font-bold font-headline text-primary">82.4%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 82.4%"></div>
+</div>
+</div>
+<!-- Shear -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="text-sm font-medium text-on-surface-variant">Sức kháng cắt (Shear)</span>
+<span class="text-lg font-bold font-headline text-primary">65.8%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 65.8%"></div>
+</div>
+</div>
+<!-- Torsion -->
+<div class="space-y-2">
+<div class="flex justify-between items-end">
+<span class="text-sm font-medium text-on-surface-variant">Sức kháng xoắn (Torsion)</span>
+<span class="text-lg font-bold font-headline text-primary">42.1%</span>
+</div>
+<div class="h-1.5 w-full bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 42.1%"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Cross-section Canvas Area -->
+<div class="aspect-square bg-inverse-surface rounded-2xl relative flex items-center justify-center group">
+<div class="absolute inset-0 opacity-20" style="background-image: radial-gradient(#ffffff 1px, transparent 1px); background-size: 20px 20px;"></div>
+<div class="z-10 text-center">
+<span class="material-symbols-outlined text-surface-variant text-6xl mb-4">polyline</span>
+<p class="text-surface-variant/40 text-[10px] uppercase font-bold tracking-widest">Cross-section Preview</p>
+</div>
+<!-- Controls for Canvas -->
+<div class="absolute bottom-4 right-4 flex gap-2">
+<button class="w-10 h-10 rounded-lg bg-surface-container-highest/10 backdrop-blur-md text-white border border-white/10 hover:bg-white/20 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">zoom_in</span>
+</button>
+<button class="w-10 h-10 rounded-lg bg-surface-container-highest/10 backdrop-blur-md text-white border border-white/10 hover:bg-white/20 transition-all flex items-center justify-center">
+<span class="material-symbols-outlined text-sm">layers</span>
+</button>
+</div>
+</div>
+<!-- Reports Section -->
+<div class="flex gap-4">
+<button class="flex-1 flex items-center justify-center gap-3 border-2 border-primary-container/20 py-4 rounded-xl font-bold text-primary-container hover:bg-primary-container/5 transition-all">
+<span class="material-symbols-outlined">description</span>
+                            XUẤT FILE WORD
+                        </button>
+<button class="flex-1 flex items-center justify-center gap-3 border-2 border-primary-container/20 py-4 rounded-xl font-bold text-primary-container hover:bg-primary-container/5 transition-all">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+                            XUẤT FILE PDF
+                        </button>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer (Universal) -->
+<footer class="bg-[#f8fafb] dark:bg-slate-900 w-full py-4 mt-auto border-t border-slate-200 dark:border-slate-800 flex flex-col items-center justify-center gap-1">
+<div class="flex gap-6 mb-1">
+<a class="text-slate-400 text-[10px] uppercase tracking-widest hover:text-[#006875] transition-colors" href="#">Điều khoản</a>
+<a class="text-slate-400 text-[10px] uppercase tracking-widest hover:text-[#006875] transition-colors" href="#">Liên hệ hỗ trợ</a>
+</div>
+<p class="text-[10px] uppercase tracking-widest font-['Inter'] text-slate-400">© 2024 Trường Đại học GTVT - UTC. All Rights Reserved.</p>
+</footer>
+</body></html>
