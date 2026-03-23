@@ -618,4 +618,5 @@ function App() {
   );
 }
 
+// Vercel Auto-deploy trigger: Updated UI and Calculation Logic - 2026-03-23
 export default App;
