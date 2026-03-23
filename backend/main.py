@@ -14,6 +14,10 @@ from fastapi.staticfiles import StaticFiles
 
 app = FastAPI(title="Bridge Section Auditor Pro API", version="1.0.0")
 
+@app.get("/")
+async def root():
+    return {"status": "online", "message": "Bridge Section Auditor Pro API is running!"}
+
 # Mount thư mục báo cáo tĩnh
 import os
 os.makedirs("reports", exist_ok=True)
