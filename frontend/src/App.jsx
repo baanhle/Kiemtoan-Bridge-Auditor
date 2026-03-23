@@ -312,7 +312,6 @@ function App() {
                         {[
                           { key: 'f_pu', label: "Kéo đứt fpu (MPa)" },
                           { key: 'f_py', label: "Giới hạn chảy fpy (MPa)" },
-                          { key: 'area_per_strand', label: "Diện tích 1 tao (mm2)" },
                           { key: 'E_p', label: "Mô đun đàn hồi Eps (MPa)" },
                           { key: 'f_pe', label: "Ư.suất hiệu quả fpe (MPa)" }
                         ].map((item) => (
@@ -386,6 +385,10 @@ function App() {
                             <input type="number" value={inputs.reinforcement.n_tendons} onChange={(e) => handleInputChange('reinforcement', 'n_tendons', e.target.value)} className="flex-1 bg-surface-container-low border-0 p-3 text-sm rounded-lg" />
                             <input type="number" value={inputs.reinforcement.n_strands} onChange={(e) => handleInputChange('reinforcement', 'n_strands', e.target.value)} className="flex-1 bg-surface-container-low border-0 p-3 text-sm rounded-lg" />
                           </div>
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-outline uppercase">Diện tích 1 tao (mm2)</label>
+                          <input type="number" value={inputs.materials.area_per_strand} onChange={(e) => handleInputChange('materials', 'area_per_strand', e.target.value)} className="w-full bg-surface-container-low border-0 p-3 text-sm rounded-lg" />
                         </div>
                         <div className="space-y-1">
                           <label className="text-[10px] font-bold text-outline uppercase">Độ lệch tâm (mm)</label>
