@@ -47,23 +47,44 @@ class TCVNEngine:
         A_prime_s = rebar.A_prime_s
         d_prime_s = rebar.d_prime_s
 
-        # Tính chiều sâu trục trung hòa c (Giả thiết trục trung hòa nằm trong bản cánh - tiết diện chữ nhật b)
-        # c = (A_ps*f_pu + A_s*f_y - A_prime_s*f_y) / (0.85 * f_c * beta1 * b + k * A_ps * f_pu / d_p)
-        numerator = (A_ps * f_pu) + (A_s * f_y) - (A_prime_s * f_y)
-        denominator = (0.85 * f_c * beta1 * b) + (k * A_ps * f_pu / d_p)
-        c = numerator / denominator if denominator != 0 else 0
-        
-        # TODO: Cần thêm logic rẽ nhánh tính tiết diện chữ T nếu a = beta1*c > h_f
-        
+        # 1. Tính chiều sâu trục trung hòa c
+        # Giả thiết ban đầu: Tiết diện chữ nhật (hoặc trục trung hòa nằm trong bản cánh)
+        numerator_rect = (A_ps * f_pu) + (A_s * f_y) - (A_prime_s * f_y)
+        denominator_rect = (0.85 * f_c * beta1 * b) + (k * A_ps * f_pu / d_p)
+        c = numerator_rect / denominator_rect if denominator_rect != 0 else 0
         a = beta1 * c
         
-        # Ứng suất cáp khi phá hoại
+        is_t_section = False
+        # Nếu a > h_f, tính lại theo tiết diện chữ T
+        if a > geom.h_f:
+            is_t_section = True
+            b_w = geom.b_w
+            h_f = geom.h_f
+            numerator_t = (A_ps * f_pu) + (A_s * f_y) - (A_prime_s * f_y) - (0.85 * f_c * (b - b_w) * h_f)
+            denominator_t = (0.85 * f_c * beta1 * b_w) + (k * A_ps * f_pu / d_p)
+            c = numerator_t / denominator_t if denominator_t != 0 else 0
+            a = beta1 * c
+
+        # 2. Ứng suất cáp khi phá hoại
         f_ps = f_pu * (1 - k * (c / d_p)) if d_p > 0 else 0
         
-        # Sức kháng danh định Mn (Lấy moment đối với thớ chịu nén)
-        M_n = (A_ps * f_ps * (d_p - a/2) + 
-               A_s * f_y * (d_s - a/2) - 
-               A_prime_s * f_y * (d_prime_s - a/2))
+        # 3. Sức kháng danh định Mn
+        if not is_t_section:
+            # Tiết diện chữ nhật
+            M_n = (A_ps * f_ps * (d_p - a/2) + 
+                   A_s * f_y * (d_s - a/2) - 
+                   A_prime_s * f_y * (d_prime_s - a/2))
+        else:
+            # Tiết diện chữ T (Bổ sung thành phần bản cánh theo công thức Sếp nhắc)
+            # Mn = [Phần sườn] + [Phần cánh nhô ra]
+            b_w = geom.b_w
+            h_f = geom.h_f
+            # Lưu ý công thức Sếp đưa ra: alpha1 * f'c * hf * (a/2 - hf/2) 
+            # Đây là thành phần moment của cánh nhô ra đối với trọng tâm khối nén sườn
+            M_n = (A_ps * f_ps * (d_p - a/2) + 
+                   A_s * f_y * (d_s - a/2) - 
+                   A_prime_s * f_y * (d_prime_s - a/2) +
+                   0.85 * f_c * (b - b_w) * h_f * (a/2 - h_f/2))
         
         # Đổi đơn vị từ N.mm sang kN.m
         M_n_kNm = M_n * 1e-6

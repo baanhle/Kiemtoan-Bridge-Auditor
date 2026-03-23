@@ -55,7 +55,7 @@ function App() {
   const [aiLoading, setAiLoading] = useState(false);
 
   const INITIAL_STATE = {
-    materials: { f_c: 35, E_c: 28397, f_y: 400, E_s: 200000, f_pu: 1860, f_py: 1674, E_p: 197000, f_pe: 1100 },
+    materials: { f_c: 35, E_c: 28397, f_y: 400, E_s: 200000, f_pu: 1860, f_py: 1674, E_p: 197000, f_pe: 1100, area_per_strand: 140 },
     geometry: { A: 1250000, I: 450000000, h: 2000, b_f: 1500, t_f: 250 },
     reinforcement: { n_bars: 24, d_bar: 32, n_tendons: 12, n_strands: 19, eccentricity: 850 },
     loads: { Mu: 4500, Vu: 1200, Nu: 300 }
@@ -116,7 +116,7 @@ function App() {
         flexural_rebar: {
           A_s: inputs.reinforcement.n_bars * Math.PI * (inputs.reinforcement.d_bar / 2) ** 2,
           d_s: inputs.geometry.h - 100,
-          A_ps: inputs.reinforcement.n_tendons * inputs.reinforcement.n_strands * 140,
+          A_ps: inputs.reinforcement.n_tendons * inputs.reinforcement.n_strands * inputs.materials.area_per_strand,
           d_p: inputs.geometry.h - inputs.reinforcement.eccentricity
         },
         shear_rebar: {
@@ -312,6 +312,7 @@ function App() {
                         {[
                           { key: 'f_pu', label: "Kéo đứt fpu (MPa)" },
                           { key: 'f_py', label: "Giới hạn chảy fpy (MPa)" },
+                          { key: 'area_per_strand', label: "Diện tích 1 tao (mm2)" },
                           { key: 'E_p', label: "Mô đun đàn hồi Eps (MPa)" },
                           { key: 'f_pe', label: "Ư.suất hiệu quả fpe (MPa)" }
                         ].map((item) => (
