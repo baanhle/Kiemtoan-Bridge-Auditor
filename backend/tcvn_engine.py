@@ -36,7 +36,11 @@ class TCVNEngine:
         
         A_ps = rebar.A_ps
         f_pu = mats.f_pu
-        d_p = rebar.d_p
+        # Tính toán d_p từ y_p (khoảng cách thớ dưới)
+        d_p = geom.h - rebar.y_p
+        # Cập nhật dp vào rebar để dùng cho các hàm khác nếu cần
+        rebar.d_p = d_p
+        
         b = geom.b
         f_c = mats.f_c
         
@@ -86,27 +90,43 @@ class TCVNEngine:
                    A_prime_s * f_y * (d_prime_s - a/2) +
                    0.85 * f_c * (b - b_w) * h_f * (a/2 - h_f/2))
         
+        # 4. Kiểm tra điều kiện dẻo và quá cốt thép
+        # Theo TCVN 11823-5:2017 Điều 5.7.3.3.1: c/de <= 0.42
+        # Ở đây ta kiểm tra c/dp sơ bộ
+        is_over_reinforced = False
+        warning_msg = ""
+        if d_p > 0:
+            c_de_ratio = c / d_p
+            if c_de_ratio > 0.42:
+                is_over_reinforced = True
+                warning_msg = f"CẢNH BÁO: Tiết diện quá cốt thép (c/dp={c_de_ratio:.2f} > 0.42). " \
+                              "Sức kháng có thể bị giảm do bê tông bị ép vỡ trước khi thép đạt cường độ."
+
         # Đổi đơn vị từ N.mm sang kN.m
         M_n_kNm = M_n * 1e-6
         
-        phi_f = 1.0 # Tạm lấy hệ số cường độ cho cấu kiện DUL chịu uốn (cần kiểm tra độ biến dạng để lấy phi)
+        phi_f = 1.0 
         capacity = phi_f * M_n_kNm
         demand = forces.M_u
         
         ratio = demand / capacity if capacity != 0 else 0
-        is_passed = capacity >= demand
+        is_passed = capacity >= demand and not is_over_reinforced
 
         # Lưu trung gian
         self.c = c
         self.a = a
         self.f_ps = f_ps
 
+        res_details = f"Mn={M_n_kNm:.2f} kNm, a={a:.2f} mm, fps={f_ps:.2f} MPa"
+        if warning_msg:
+            res_details += " | " + warning_msg
+
         return CapacityResult(
             capacity=capacity,
             demand=demand,
             ratio=ratio,
             is_passed=is_passed,
-            details=f"Mn={M_n_kNm:.2f} kNm, a={a:.2f} mm, fps={f_ps:.2f} MPa"
+            details=res_details
         )
 
     def calculate_shear_resistance(self) -> CapacityResult:

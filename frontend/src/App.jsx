@@ -57,7 +57,7 @@ function App() {
   const INITIAL_STATE = {
     materials: { f_c: 35, E_c: 28397, f_y: 400, E_s: 200000, f_pu: 1860, f_py: 1674, E_p: 197000, f_pe: 1100, area_per_strand: 140 },
     geometry: { A: 1250000, I: 450000000, h: 2000, b_f: 1500, t_f: 250 },
-    reinforcement: { n_bars: 24, d_bar: 32, n_tendons: 12, n_strands: 19, eccentricity: 850 },
+    reinforcement: { n_bars: 24, d_bar: 32, n_tendons: 12, n_strands: 19, y_p: 150 },
     loads: { Mu: 4500, Vu: 1200, Nu: 300 }
   };
 
@@ -117,7 +117,8 @@ function App() {
           A_s: inputs.reinforcement.n_bars * Math.PI * (inputs.reinforcement.d_bar / 2) ** 2,
           d_s: inputs.geometry.h - 100,
           A_ps: inputs.reinforcement.n_tendons * inputs.reinforcement.n_strands * inputs.materials.area_per_strand,
-          d_p: inputs.geometry.h - inputs.reinforcement.eccentricity
+          y_p: inputs.reinforcement.y_p,
+          d_p: 0 // Sẽ tính ở Backend từ y_p
         },
         shear_rebar: {
           A_v: 628, // Default stirrup
@@ -391,8 +392,8 @@ function App() {
                           <input type="number" value={inputs.materials.area_per_strand} onChange={(e) => handleInputChange('materials', 'area_per_strand', e.target.value)} className="w-full bg-surface-container-low border-0 p-3 text-sm rounded-lg" />
                         </div>
                         <div className="space-y-1">
-                          <label className="text-[10px] font-bold text-outline uppercase">Độ lệch tâm (mm)</label>
-                          <input type="number" value={inputs.reinforcement.eccentricity} onChange={(e) => handleInputChange('reinforcement', 'eccentricity', e.target.value)} className="w-full bg-surface-container-low border-0 p-3 text-sm rounded-lg" />
+                          <label className="text-[10px] font-bold text-outline uppercase">Khoảng cách từ đáy dầm đến cáp (mm)</label>
+                          <input type="number" value={inputs.reinforcement.y_p} onChange={(e) => handleInputChange('reinforcement', 'y_p', e.target.value)} className="w-full bg-surface-container-low border-0 p-3 text-sm rounded-lg" />
                         </div>
                       </div>
                     </div>

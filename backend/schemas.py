@@ -45,7 +45,8 @@ class Reinforcement(BaseModel):
     A_prime_s: float = Field(0.0, description="Diện tích cốt thép thường chịu nén (A's) [mm2]", ge=0)
     d_prime_s: float = Field(0.0, description="Khoảng cách từ thớ nén xa nhất đến trọng tâm A's (d's) [mm]", ge=0)
     A_ps: float = Field(..., description="Diện tích cáp dự ứng lực (Aps) [mm2]", gt=0)
-    d_p: float = Field(..., description="Khoảng cách từ thớ nén xa nhất đến trọng tâm cáp (dp) [mm]", gt=0)
+    y_p: float = Field(0.0, description="Khoảng cách từ thớ dưới (đáy) đến trọng tâm cáp [mm]", ge=0)
+    d_p: float = Field(0.0, description="Khoảng cách từ thớ nén xa nhất đến trọng tâm cáp (dp) [mm]", ge=0)
 
 class ShearReinforcement(BaseModel):
     """Bố trí cốt đai (Cắt)"""
