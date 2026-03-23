@@ -162,4 +162,5 @@ results/
 temp/
 *.pdf
 *.docx
+!backend/templates/*.docx
 !Bridge_Report_Template.docx
