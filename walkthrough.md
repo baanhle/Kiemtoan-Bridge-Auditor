@@ -35,7 +35,7 @@ Tuân thủ yêu cầu của Sếp, em đã lược bỏ các phiên bản thử
 Em đã ghi nhận các cột mốc quan trọng Sếp vừa hoàn thành:
 
 1. **Mã nguồn:** Đã được đẩy lên GitHub tại repo [baanhle/Kiemtoan-Bridge-Auditor](https://github.com/baanhle/Kiemtoan-Bridge-Auditor.git).
-2. **Frontend:** Đã kết nối và tự động deploy trên **Vercel**.
+2. **Frontend:** Đã kết nối và tự động deploy trên **Vercel** tại địa chỉ: [https://kiemtoan-bridge-auditor-bte.vercel.app/](https://kiemtoan-bridge-auditor-bte.vercel.app/)
 3. **Backend:** Đã cấu hình Dockerfile và chạy ổn định trên **Render**.
 
 ---
