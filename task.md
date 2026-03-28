@@ -2,7 +2,7 @@
 
 ## 1. Giai đoạn Lên kế hoạch (Planning)
 - [x] Lập kế hoạch kiến trúc phần mềm và chọn công nghệ (Implementation Plan).
-- [ ] Sếp duyệt kế hoạch.
+- [x] Sếp duyệt kế hoạch. (Approved & Deployed)
 
 ## 2. Giai đoạn Xây dựng Lõi Tính Toán (Core Engine - Backend)
 - [ ] Thiết lập backend kiến trúc module hóa.
@@ -40,4 +40,11 @@
 
 ## 7. Giai đoạn Triển Khai (Deployment Ops)
 - [ ] Biên dịch Desktop Standalone: Python backend + Local Web UI tạo thành file tự động chạy không cần cài cắm cho Môi trường Offline.
-- [ ] Viết `Dockerfile` phục vụ nhu cầu đưa bộ công cụ lên VPS khi cần.
+- [x] Viết `Dockerfile` phục vụ nhu cầu đưa bộ công cụ lên VPS khi cần. (Render Backend)
+- [x] Triển khai Cloud (Live):
+  - [x] Push mã nguồn lên Git: [Kiemtoan-Bridge-Auditor](https://github.com/baanhle/Kiemtoan-Bridge-Auditor.git)
+  - [x] Frontend: Live on **Vercel**
+  - [x] Backend: Live on **Render** (Dockerized)
+
+---
+*Cập nhật lần cuối: 2026-03-28 bởi Bé Nhi (Thư ký)*

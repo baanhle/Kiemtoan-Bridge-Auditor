@@ -57,7 +57,7 @@ function App() {
   const INITIAL_STATE = {
     materials: { f_c: 35, E_c: 28397, f_y: 400, E_s: 200000, f_pu: 1860, f_py: 1674, E_p: 197000, f_pe: 1100, area_per_strand: 140 },
     geometry: { A: 1250000, I: 450000000, h: 2000, b_f: 1500, t_f: 250 },
-    reinforcement: { n_bars: 24, d_bar: 32, n_tendons: 12, n_strands: 19, y_p: 150 },
+    reinforcement: { n_bars: 0, d_bar: 32, y_s: 50, n_tendons: 1, n_strands: 40, y_p: 150 },
     loads: { Mu: 4500, Vu: 1200, Nu: 300 }
   };
 
@@ -115,7 +115,7 @@ function App() {
         },
         flexural_rebar: {
           A_s: inputs.reinforcement.n_bars * Math.PI * (inputs.reinforcement.d_bar / 2) ** 2,
-          d_s: inputs.geometry.h - 100,
+          d_s: inputs.geometry.h - inputs.reinforcement.y_s,
           A_ps: inputs.reinforcement.n_tendons * inputs.reinforcement.n_strands * inputs.materials.area_per_strand,
           y_p: inputs.reinforcement.y_p,
           d_p: 0 // Sẽ tính ở Backend từ y_p
@@ -373,6 +373,10 @@ function App() {
                           <label className="text-[10px] font-bold text-outline uppercase">Đường kính (mm)</label>
                           <input type="number" value={inputs.reinforcement.d_bar} onChange={(e) => handleInputChange('reinforcement', 'd_bar', e.target.value)} className="w-full bg-surface-container-low border-0 p-3 text-sm rounded-lg" />
                         </div>
+                        <div className="space-y-1">
+                          <label className="text-[10px] font-bold text-outline uppercase">Khoảng cách đến đáy dầm (mm)</label>
+                          <input type="number" value={inputs.reinforcement.y_s} onChange={(e) => handleInputChange('reinforcement', 'y_s', e.target.value)} className="w-full bg-surface-container-low border-0 p-3 text-sm rounded-lg" />
+                        </div>
                       </div>
                     </div>
                     <div className="space-y-4">
@@ -481,7 +485,18 @@ function App() {
                             <h2 className="text-4xl font-extrabold font-headline mb-4 tracking-tighter uppercase">
                               {results.overall_status === 'ĐẠT' ? 'ĐẠT YÊU CẦU' : 'KHÔNG ĐẠT'}
                             </h2>
-                            <p className="text-sm opacity-80 max-w-xs leading-relaxed">
+                            {results.overall_status === 'KHÔNG ĐẠT' && (
+                              <div className="bg-white/20 p-3 rounded-xl backdrop-blur-md border border-white/30 text-xs font-medium space-y-1">
+                                <p className="opacity-100 font-bold underline">Phân tích lỗi (Sếp chú ý!):</p>
+                                {(results.flexural.ratio > 1 || results.shear.ratio > 1) && (
+                                  <p>⚠️ "Thiếu diện tích cốt thép": Nội lực MU/VU lớn hơn sức kháng của mặt cắt. Sếp hãy thử tăng số bó cáp, tao cáp hoặc thêm cốt thép thường nếu cần nhé.</p>
+                                )}
+                                {results.flexural.details.includes('quá cốt thép') && (
+                                  <p>⚠️ "Tiết diện quá cốt thép": Cần giảm lượng thép hoặc tăng kích thước bê tông để đảm bảo phá hoại dẻo.</p>
+                                )}
+                              </div>
+                            )}
+                            <p className="text-sm opacity-80 max-w-xs leading-relaxed mt-4">
                               Mặt cắt đã được kiểm tra theo {activeStandard}.
                             </p>
                           </div>

@@ -24,3 +24,14 @@ Tuân thủ yêu cầu của Sếp, em đã lược bỏ các phiên bản thử
 
 > [!NOTE]
 > Do công cụ render Stitch-MCP đang bận xử lý (Connecting...), hình ảnh preview có thể chưa hiện nút dropdown này ngay lập tức. Tuy nhiên, em đã cam kết và đưa nó vào **Bản thiết kế kỹ thuật (Blueprint)** để hiện thực hóa trong mã nguồn thực tế.
+
+## 🚀 Kết nối Hệ sinh thái Cloud (Live Deployment)
+
+Em đã ghi nhận các cột mốc quan trọng Sếp vừa hoàn thành:
+
+1. **Mã nguồn:** Đã được đẩy lên GitHub tại repo [baanhle/Kiemtoan-Bridge-Auditor](https://github.com/baanhle/Kiemtoan-Bridge-Auditor.git).
+2. **Frontend:** Đã kết nối và tự động deploy trên **Vercel**.
+3. **Backend:** Đã cấu hình Dockerfile và chạy ổn định trên **Render**.
+
+---
+*Cập nhật lần cuối: 2026-03-28 bởi Bé Nhi (Thư ký)*
