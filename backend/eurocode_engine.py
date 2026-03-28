@@ -33,12 +33,15 @@ class EurocodeEngine:
         f_yd = mats.f_y / 1.15
         f_pd = mats.f_py / 1.15 # f_py ở đây tương đương f_p0.1k (giới hạn chảy 0.1%)
         
+        # Tính toán d_p từ y_p
+        d_p = geom.h - rebar.y_p
+        rebar.d_p = d_p
+        
         A_ps = rebar.A_ps
-        d_p = rebar.d_p
         b = geom.b
         A_s = rebar.A_s
         d_s = rebar.d_s
-        
+
         # Tính chiều sâu khối ứng suất (x)
         numerator = (A_ps * f_pd) + (A_s * f_yd)
         denominator = (lam * f_cd * b)
