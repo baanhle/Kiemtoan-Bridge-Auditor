@@ -13,9 +13,14 @@ Tuân thủ yêu cầu của Sếp, em đã lược bỏ các phiên bản thử
 
 ### 1. Vùng Nhập liệu (Bên trái)
 - **Thông số Hình học:** Bổ sung Bề rộng cánh trên/dưới, Bề dày bản nắp/đáy, Diện tích (A), Moment (I)...
-- **Cấu tạo Cáp dự ứng lực:** Chi tiết về Số bó cáp, Số tao cáp/bó và Vị trí trọng tâm cáp.
-- **Nội lực:** Mu, Vu, Nu.
+- **Cấu tạo Cáp dự ứng lực:** Chi tiết về Số bó cáp, Số tao cáp/bó (Mặc định: 1 bó, 40 tao) và Vị trí trọng tâm cáp.
+- **Thép thường (Mới):** Đặt mặc định là 0 thanh. Bổ sung trường **Khoảng cách đến đáy dầm (y_s)** với giá trị mặc định 50mm.
 - **Nút điều khiển:** Hai nút lớn **CHẠY KIỂM TOÁN** và **XÓA DỮ LIỆU** đặt ngay cuối form.
+
+### 2. Vùng Kết quả & Phân tích (Bên phải)
+- **Cảnh báo Thông minh:** Khi kết quả "KHÔNG ĐẠT", hệ thống sẽ hiển thị khối **Phân tích lỗi** chi tiết:
+    - Nếu Mu/Vu vượt quá sức kháng: Cảnh báo "Thiếu diện tích cốt thép".
+    - Nếu c/dp > 0.42: Cảnh báo "Tiết diện quá cốt thép".
 
 ### 3. Thanh Header & Lựa chọn Tiêu chuẩn (Final Tech Spec)
 - **Standard Selector:** Dropdown lựa chọn 3 tiêu chuẩn cốt lõi: **TCVN 11823:2017**, **AASHTO LRFD**, **Eurocode**.

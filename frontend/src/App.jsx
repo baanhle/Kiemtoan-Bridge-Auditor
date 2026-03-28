@@ -491,8 +491,8 @@ function App() {
                                 {(results.flexural.ratio > 1 || results.shear.ratio > 1) && (
                                   <p>⚠️ "Thiếu diện tích cốt thép": Nội lực MU/VU lớn hơn sức kháng của mặt cắt. Sếp hãy thử tăng số bó cáp, tao cáp hoặc thêm cốt thép thường nếu cần nhé.</p>
                                 )}
-                                {results.flexural.details.includes('quá cốt thép') && (
-                                  <p>⚠️ "Tiết diện quá cốt thép": Cần giảm lượng thép hoặc tăng kích thước bê tông để đảm bảo phá hoại dẻo.</p>
+                                {results.flexural.details.includes('phá hoại dẻo') && (
+                                  <p>⚠️ "Vi phạm điều kiện phá hoại dẻo" (c/de ≤ 0.42): Cần giảm lượng thép hoặc tăng kích thước bê tông để tránh dầm bị phá hoại giòn đột ngột.</p>
                                 )}
                               </div>
                             )}

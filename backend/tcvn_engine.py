@@ -99,7 +99,7 @@ class TCVNEngine:
             c_de_ratio = c / d_p
             if c_de_ratio > 0.42:
                 is_over_reinforced = True
-                warning_msg = f"CẢNH BÁO: Tiết diện quá cốt thép (c/dp={c_de_ratio:.2f} > 0.42). " \
+                warning_msg = f"CẢNH BÁO: Vi phạm điều kiện phá hoại dẻo (c/de={c_de_ratio:.2f} > 0.42). " \
                               "Sức kháng có thể bị giảm do bê tông bị ép vỡ trước khi thép đạt cường độ."
 
         # Đổi đơn vị từ N.mm sang kN.m
