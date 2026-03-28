@@ -88,6 +88,7 @@ class CapacityResult(BaseModel):
     demand: float = Field(..., description="Nội lực yêu cầu (Mu/Vu) [kN.m hoặc kN]")
     ratio: float = Field(..., description="Tỷ số Demand/Capacity")
     is_passed: bool = Field(..., description="Đạt (True) / Không Đạt (False)")
+    details: str = Field("", description="Chi tiết tính toán hoặc cảnh báo cụ thể")
 
 class DetailsTCVN(BaseModel):
     """Trích xuất các biến trung gian để in Báo Cáo Word TCVN"""

@@ -485,13 +485,13 @@ function App() {
                             <h2 className="text-4xl font-extrabold font-headline mb-4 tracking-tighter uppercase">
                               {results.overall_status === 'ĐẠT' ? 'ĐẠT YÊU CẦU' : 'KHÔNG ĐẠT'}
                             </h2>
-                            {results.overall_status === 'KHÔNG ĐẠT' && (
+                            {results?.overall_status === 'KHÔNG ĐẠT' && (
                               <div className="bg-white/20 p-3 rounded-xl backdrop-blur-md border border-white/30 text-xs font-medium space-y-1">
                                 <p className="opacity-100 font-bold underline">Phân tích lỗi (Sếp chú ý!):</p>
-                                {(results.flexural.ratio > 1 || results.shear.ratio > 1) && (
+                                {(results?.flexural?.ratio > 1 || results?.shear?.ratio > 1) && (
                                   <p>⚠️ "Thiếu diện tích cốt thép": Nội lực MU/VU lớn hơn sức kháng của mặt cắt. Sếp hãy thử tăng số bó cáp, tao cáp hoặc thêm cốt thép thường nếu cần nhé.</p>
                                 )}
-                                {results.flexural.details.includes('phá hoại dẻo') && (
+                                {results?.flexural?.details?.includes('phá hoại dẻo') && (
                                   <p>⚠️ "Vi phạm điều kiện phá hoại dẻo" (c/de ≤ 0.42): Cần giảm lượng thép hoặc tăng kích thước bê tông để tránh dầm bị phá hoại giòn đột ngột.</p>
                                 )}
                               </div>
@@ -511,13 +511,13 @@ function App() {
                           {[
                             {
                               label: 'Sức kháng uốn (Moment)',
-                              ratio: (results.flexural.ratio * 100).toFixed(1),
-                              desc: `Mn = ${results.flexural.capacity.toFixed(1)} kNm (Y/c: ${results.flexural.demand.toFixed(1)})`
+                              ratio: ((results?.flexural?.ratio || 0) * 100).toFixed(1),
+                              desc: `Mn = ${results?.flexural?.capacity?.toFixed(1) || 0} kNm (Y/c: ${results?.flexural?.demand?.toFixed(1) || 0})`
                             },
                             {
                               label: 'Sức kháng cắt (Shear)',
-                              ratio: (results.shear.ratio * 100).toFixed(1),
-                              desc: `Vn = ${results.shear.capacity.toFixed(1)} kN (Y/c: ${results.shear.demand.toFixed(1)})`
+                              ratio: ((results?.shear?.ratio || 0) * 100).toFixed(1),
+                              desc: `Vn = ${results?.shear?.capacity?.toFixed(1) || 0} kN (Y/c: ${results?.shear?.demand?.toFixed(1) || 0})`
                             }
                           ].map((item, idx) => (
                             <div key={idx} className="space-y-2">
