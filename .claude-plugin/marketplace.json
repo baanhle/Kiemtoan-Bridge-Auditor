@@ -1,0 +1,14 @@
+{
+  "name": "baanhle-research",
+  "owner": {
+    "name": "LE Ba Anh"
+  },
+  "plugins": [
+    {
+      "name": "auto-research",
+      "source": "./auto-research",
+      "description": "Pipeline nghiên cứu tự động từ tài liệu đến bản thảo."
+    }
+  ],
+  "description": "Plugin nghiên cứu tự động cho Claude Code"
+}

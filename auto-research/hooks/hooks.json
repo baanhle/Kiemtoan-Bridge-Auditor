@@ -1,0 +1,28 @@
+{
+  "description": "Cổng kiểm tra auto-research: chặn kết thúc phiên khi pipeline chưa xong hoặc 5 cổng chưa đạt; kiểm tra nhanh trích dẫn/số liệu khi sửa bản thảo.",
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/scripts/run_gates.py\" --hook stop",
+            "timeout": 3600
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"${CLAUDE_PLUGIN_ROOT}/scripts/run_gates.py\" --hook edit",
+            "timeout": 300
+          }
+        ]
+      }
+    ]
+  }
+}

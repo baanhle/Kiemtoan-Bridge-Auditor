@@ -1,0 +1,15 @@
+{
+  "name": "auto-research",
+  "version": "0.1.0",
+  "description": "Pipeline nghiên cứu tự động 13 giai đoạn: tìm tài liệu → khoảng trống → câu hỏi → mô phỏng → bản thảo, có cổng kiểm tra trích dẫn/số liệu/tái lập/tính mới/nhất quán.",
+  "author": {
+    "name": "LE Ba Anh"
+  },
+  "keywords": [
+    "research",
+    "literature-review",
+    "manuscript",
+    "fem"
+  ],
+  "license": "MIT"
+}

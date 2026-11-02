@@ -1,0 +1,55 @@
+# Hồ sơ định hướng — điền MỘT lần, dùng cho mọi lần chạy.
+# Đặt file này tại D:/Research/profile.yaml
+
+researcher:
+  name: "LE Ba Anh"
+  expertise:            # dùng để chấm "khớp chuyên môn"
+    - cơ học kết cấu
+    - phương pháp phần tử hữu hạn
+    - vật liệu kiến trúc (architected materials)
+
+contact_email: "you@example.com"   # bắt buộc cho Unpaywall/Crossref polite pool
+
+# Lĩnh vực và từ khoá (tiếng Việt để mô tả, tiếng Anh để tìm kiếm)
+keywords:
+  - cấu trúc lưới TPMS
+  - vật liệu auxetic
+  - kết cấu bê tông có pha đồng liên tục
+  - giảm chấn dây văng
+keywords_en:
+  - TPMS lattice
+  - auxetic metamaterial
+  - interpenetrating phase composite concrete
+  - stay cable damper
+# Truy vấn cụ thể (tuỳ chọn). Bỏ trống thì ghép từ keywords_en.
+search_queries:
+  - "TPMS lattice mechanical properties finite element"
+  - "auxetic metamaterial impact energy absorption"
+
+# Công cụ có sẵn — căn cứ chấm tính khả thi
+tools:
+  fem: ["Abaqus 2023", "CalculiX"]          # phần mềm FEM
+  languages: ["Python 3.11"]
+  python_packages: ["numpy", "scipy", "matplotlib", "pandas"]
+  solver_commands:                           # lệnh gọi solver được phép (khớp settings.json)
+    - "abaqus"
+    - "ccx"
+  compute: "Laptop 8 nhân, 32 GB RAM, không GPU; tối đa ~12 giờ CPU mỗi lần chạy"
+
+# Đầu ra
+target_journals: ["Thin-Walled Structures", "Composite Structures", "Engineering Structures"]
+manuscript_language: "en"          # en | vi
+output_format: "word"              # word | latex
+citation_style: "elsevier-harvard" # chỉ ghi chú; đặt file manuscript/style.csl nếu cần
+
+# Giới hạn tài liệu
+years_back: 5                # khoảng năm tài liệu (mặc định 5 năm gần nhất)
+max_fulltext: 30             # số bài tải toàn văn tối đa mỗi lần chạy
+download_delay_seconds: 20   # giãn cách giữa các lần tải (KHÔNG giảm — tránh khoá truy cập của trường)
+max_parallel_subagents: 3    # giới hạn subagent song song (chi phí)
+
+# Truy cập qua trường (giai đoạn 3, dùng Claude in Chrome)
+institutional_access:
+  enabled: true
+  portal: "db.vista"                       # hoặc openathens
+  start_url: "https://my.openathens.net/"  # trang bắt đầu đã đăng nhập sẵn trong Chrome
